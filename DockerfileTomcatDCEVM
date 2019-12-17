@@ -14,5 +14,13 @@ RUN mkdir /usr/local/dcevm && \
     tar -xf /tmp/dcevm.tar.gz -C /usr/local/dcevm --strip 1 && \
     rm /tmp/dcevm.tar.gz
 
+#Fix issues with HotswapAgent plugin CxfJAXRS
+RUN curl -L -o /usr/local/dcevm/lib/hotswap/hotswap-agent.jar https://github.com/Silvermedia/HotswapAgent/releases/download/1.3.1.sm1-SNAPSHOT/hotswap-agent.jar
+
+ENV JPDA_ADDRESS=8001
+ENV JPDA_TRANSPORT=dt_socket
 ENV PATH="/usr/local/dcevm/bin:${PATH}"
 ENV JAVA_HOME=/usr/local/dcevm
+
+EXPOSE 8001
+

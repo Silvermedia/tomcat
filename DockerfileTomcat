@@ -1,3 +1,4 @@
 ARG VERSION
 FROM tomcat:$VERSION
 RUN  rm -fr /usr/local/tomcat/webapps/ROOT
+
