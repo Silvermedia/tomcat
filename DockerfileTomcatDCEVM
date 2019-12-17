@@ -8,9 +8,8 @@ RUN apt-get update && \
     apt-get install -y curl && \
     apt-get clean
 
-RUN curl -L -o /tmp/dcevm.tar.gz https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.5%2B5/java11-openjdk-dcevm-linux.tar.gz
-
-RUN mkdir /usr/local/dcevm && \
+RUN curl -L -o /tmp/dcevm.tar.gz https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.5%2B5/java11-openjdk-dcevm-linux.tar.gz && \
+    mkdir /usr/local/dcevm && \
     tar -xf /tmp/dcevm.tar.gz -C /usr/local/dcevm --strip 1 && \
     rm /tmp/dcevm.tar.gz
 
