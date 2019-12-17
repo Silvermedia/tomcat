@@ -1,0 +1,25 @@
+ARG VERSION
+
+FROM silvermedia/tomcat:$VERSION
+
+RUN rm -rf /usr/local/openjdk-11
+
+RUN apt-get update && \
+    apt-get install -y curl && \
+    apt-get clean
+
+RUN curl -L -o /tmp/dcevm.tar.gz https://github.com/TravaOpenJDK/trava-jdk-11-dcevm/releases/download/dcevm-11.0.5%2B5/java11-openjdk-dcevm-linux.tar.gz && \
+    mkdir /usr/local/dcevm && \
+    tar -xf /tmp/dcevm.tar.gz -C /usr/local/dcevm --strip 1 && \
+    rm /tmp/dcevm.tar.gz
+
+#Fix issues with HotswapAgent plugin CxfJAXRS
+RUN curl -L -o /usr/local/dcevm/lib/hotswap/hotswap-agent.jar https://github.com/Silvermedia/HotswapAgent/releases/download/1.3.1.sm1-SNAPSHOT/hotswap-agent.jar
+
+ENV JPDA_ADDRESS=8001
+ENV JPDA_TRANSPORT=dt_socket
+ENV PATH="/usr/local/dcevm/bin:${PATH}"
+ENV JAVA_HOME=/usr/local/dcevm
+
+EXPOSE 8001
+
