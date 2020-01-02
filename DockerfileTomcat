@@ -1,0 +1,8 @@
+ARG VERSION
+FROM tomcat:$VERSION
+
+RUN  apt-get update && \
+     apt-get install -y curl && \
+     apt-get clean
+     
+RUN rm -fr /usr/local/tomcat/webapps/ROOT
