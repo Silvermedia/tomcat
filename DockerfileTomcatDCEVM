@@ -10,7 +10,10 @@ RUN curl -L -o /tmp/dcevm.tar.gz https://github.com/TravaOpenJDK/trava-jdk-11-dc
     tar -xf /tmp/dcevm.tar.gz -C /usr/local/dcevm --strip 1 && \
     rm /tmp/dcevm.tar.gz
 
-RUN curl -L -o /usr/local/dcevm/lib/hotswap/hotswap-agent.jar https://github.com/HotswapProjects/HotswapAgent/releases/download/1.4.2-SNAPSHOT/hotswap-agent-1.4.2-SNAPSHOT.jar
+
+#Fixes issue with Hibernate SessionFactory resulting in InvocationTargetException instead of proper exception
+RUN curl -L -o /usr/local/dcevm/lib/hotswap/hotswap-agent.jar https://github.com/Silvermedia/HotswapAgent/releases/download/1.4.2.sm1-SNAPSHOT/hotswap-agent.jar
+
 
 ENV JPDA_ADDRESS=8001
 ENV JPDA_TRANSPORT=dt_socket
